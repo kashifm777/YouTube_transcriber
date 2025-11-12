@@ -15,25 +15,21 @@ within 250 words. Please provide the summary of the text given here:  """
 
 
 ## getting the transcript data from yt videos
+# In app.py
 def extract_transcript_details(youtube_video_url):
     try:
         video_id=youtube_video_url.split("=")[1]
-        
-        transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
-
+        transcript_text=get_transcript(video_id)
         transcript = ""
         for i in transcript_text:
             transcript += " " + i["text"]
-
         return transcript
-
     except Exception as e:
         raise e
-    
+        
 ## getting the summary based on Prompt from Google Gemini Pro
 def generate_gemini_content(transcript_text,prompt):
-
-    model=genai.GenerativeModel("gemini-pro")
+    model=genai.GenerativeModel("gemini-2.5-flash")
     response=model.generate_content(prompt+transcript_text)
     return response.text
 
