@@ -6,6 +6,7 @@ import os
 import google.generativeai as genai
 
 from youtube_transcript_api import get_transcript
+from youtube_transcript_api.api import get_transcript
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
